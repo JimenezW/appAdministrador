@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-content>
       <div class="header">
-        <P>Sign Into Your Account </P>
+        <P>Iniciar sesión</P>
       </div>
       <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
         <div class="emailInput">
@@ -40,7 +40,7 @@
       </form>
 
       <div class="button-row">
-        <p>Registrarse</p>
+        <a class="text-link" class="aLink" routerLink="/auth/register" >Registrar</a>
       </div>
     </mat-card-content>
   </mat-card>

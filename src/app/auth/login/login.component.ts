@@ -14,14 +14,14 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private _autService : UserService, private _router : Router) {
   }
 
-  ngOnInit() {
-  }
-
+  
   loginForm: FormGroup = this.fb.group({
     UserName: ['', [Validators.required]],
     Password: ['', [Validators.required, Validators.minLength(6)]]
-  })
-
+  });
+  
+  ngOnInit() {
+  }
 
   onLogin() {
     
@@ -36,9 +36,13 @@ export class LoginComponent {
 
     this._autService.login(formData).subscribe(res=>{
       if(res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
-        this._router.navigateByUrl('/dashboard');
+        this._router.navigateByUrl('/home');
       }
     });
     
+  }
+
+  onRegister(){
+    this._router.navigateByUrl('/register');
   }
 }

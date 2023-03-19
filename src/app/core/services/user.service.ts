@@ -18,8 +18,8 @@ export class UserService {
     private _cookie : CookieService,
     private jwtHelper: JwtHelperService) { }
 
-    register(user:UserI):Observable<JwtResponseI>{
-      return this._http.post<JwtResponseI>(`http://localhost:50592/register`,user).pipe(tap((res:JwtResponseI)=>{
+    register(user:any):Observable<JwtResponseI>{
+      return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
           this.saveToken(res.jwtToken,res.expireAt);
