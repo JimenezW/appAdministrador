@@ -22,7 +22,7 @@ export class UserService {
       return this._http.post<JwtResponseI>(`http://localhost:50592/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
-          this.saveToken(res.token,res.expireAt);
+          this.saveToken(res.jwtToken,res.expireAt);
         }
       })
       );
@@ -33,7 +33,7 @@ export class UserService {
         
         if(res){
           //guardar token
-          this.saveToken(res.token,res.expireAt);
+          this.saveToken(res.jwtToken,res.expireAt);
   
         }
       }),catchError((err)=>{

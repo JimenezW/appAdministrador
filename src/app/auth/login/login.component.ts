@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class LoginComponent {
   hide: boolean = false;
 
-  constructor(private fb: FormBuilder, private _autService : UserService) {
+  constructor(private fb: FormBuilder, private _autService : UserService, private _router : Router) {
   }
 
   ngOnInit() {
@@ -34,7 +35,9 @@ export class LoginComponent {
     formData.append("Password", this.loginForm.controls['Password'].value); 
 
     this._autService.login(formData).subscribe(res=>{
-
+      if(res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
+        this._router.navigateByUrl('/dashboard');
+      }
     });
     
   }

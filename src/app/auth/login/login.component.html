@@ -10,20 +10,20 @@
             <input
               formControlName="UserName"
               matInput
-              placeholder="Enter email address" required
+              placeholder="Usuario" required
             />
             <mat-error *ngIf="!loginForm.controls['UserName'].valid">
-                Email is required
+                Usuario es requerido
               </mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <span>
-            <a class="text-link" class="aLink" routerLink="/auth/forgot-password">Forgot Password?</a>
+            <a class="text-link" class="aLink" routerLink="/auth/forgot-password">¿Restablecer Contraseña?</a>
           </span>
           <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Password</mat-label>
+            <mat-label>Contraseña</mat-label>
             <input formControlName="Password" matInput [type]=" hide ? 'password' : 'text'" required />
             <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
@@ -32,7 +32,7 @@
             </mat-icon>
         </button>
         <mat-error *ngIf="!loginForm.controls['Password'].valid">
-            Password is required
+            Contraseña es requerida
           </mat-error>
         </mat-form-field>
         </div>
@@ -40,7 +40,7 @@
       </form>
 
       <div class="button-row">
-        <p>Create New Account</p>
+        <p>Registrarse</p>
       </div>
     </mat-card-content>
   </mat-card>
