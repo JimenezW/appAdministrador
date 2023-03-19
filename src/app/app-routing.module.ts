@@ -3,6 +3,8 @@ import { RouterModule, Routes, PreloadAllModules  } from '@angular/router';
 import { ContentLayoutComponent } from '../app/layout/components/content-layout/content-layout.component'
 
 const routes: Routes = [
+  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: 'auth', loadChildren:()=> import('./auth/auth.module').then(x => x.AuthModule) }/*,
   {
     path:'',
     component: ContentLayoutComponent,
@@ -24,11 +26,16 @@ const routes: Routes = [
           pathMatch: 'full',
       }
     ]
-  }
+  }*/
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [RouterModule.forRoot(routes, { 
+    preloadingStrategy: PreloadAllModules,  
+    scrollPositionRestoration: 'top',
+    anchorScrolling: 'enabled',
+    initialNavigation: 'enabledBlocking' 
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

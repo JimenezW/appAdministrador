@@ -9,6 +9,10 @@ import { ContentLayoutComponent } from './layout/components/content-layout/conte
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+
 
 @NgModule({
   declarations: [
@@ -22,9 +26,13 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    NgbModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  exports:[CoreModule, HttpClientModule],
+  providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
