@@ -2,6 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import { AutGuard } from 'src/app/core/Guards/aut.guards';
+import { SpinnerService } from 'src/app/core/services/spinner.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,7 +21,7 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
       private media: MediaMatcher,
-      //public spinnerService: SpinnerService,
+      public spinnerService: SpinnerService,
       //private authService: AuthenticationService,
       private authGuard: AutGuard) {
 

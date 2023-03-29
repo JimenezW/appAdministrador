@@ -23,7 +23,7 @@
   </form>
 </div>
 
--->
+
 <mat-card>
     <mat-card-content>
       <div class="header">
@@ -70,3 +70,42 @@
       </div>
     </mat-card-content>
   </mat-card>
+-->
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+  <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%" (ngSubmit)="onLogin()">
+    <mat-card>
+      <mat-card-title>angular-material-template</mat-card-title>
+      <mat-card-subtitle>Log in to your account</mat-card-subtitle>
+      <mat-card-content>
+       
+        <mat-form-field class="full-width" >
+          <mat-label>Usuario</mat-label>
+          <input
+            formControlName="UserName"
+            matInput
+            placeholder="Usuario" required
+          />
+          <mat-error *ngIf="!loginForm.controls['UserName'].valid">
+              Usuario es requerido
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" >
+          <mat-label>Contraseña</mat-label>
+          <input
+            formControlName="Password"
+            matInput
+            placeholder="Contraseña" required
+          />
+          <mat-error *ngIf="!loginForm.controls['Password'].valid">
+              Contraseña requerida
+            </mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-flat-button color="primary">Login</button>
+          <a class="text-link" class="aLink" routerLink="/auth/register" >Registrar</a>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </form>
+</div>
