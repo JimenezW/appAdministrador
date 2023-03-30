@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -10,8 +11,12 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class LoginComponent {
   hide: boolean = false;
+  loading!: boolean;
 
-  constructor(private fb: FormBuilder, private _autService : UserService, private _router : Router) {
+  constructor(private fb: FormBuilder, 
+    private _autService : UserService, 
+    private _router : Router,
+    private notificationService: NotificationService) {
   }
 
   
@@ -28,7 +33,7 @@ export class LoginComponent {
     if (!this.loginForm.valid) {
       return;
     }
-
+    this.loading = true;
     let formData = new FormData();
 
     formData.append("UserName", this.loginForm.controls['UserName'].value);
@@ -38,7 +43,7 @@ export class LoginComponent {
       if(res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
         this._router.navigateByUrl('/home');
       }
-    });
+    },(er)=>{this.notificationService.openSnackBar(er.error);},()=>{this.loading = false;});
     
   }
 

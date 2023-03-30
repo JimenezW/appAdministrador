@@ -1,46 +1,42 @@
-<mat-card>
-    <mat-card-content>
-      <div class="header">
-        <P>Iniciar sesión</P>
-      </div>
-      <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
-        <div class="emailInput">
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Usuario</mat-label>
-            <input
-              formControlName="UserName"
-              matInput
-              placeholder="Usuario" required
-            />
-            <mat-error *ngIf="!loginForm.controls['UserName'].valid">
-                Usuario es requerido
-              </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div>
-          <span>
-            <a class="text-link" class="aLink" routerLink="/auth/forgot-password">¿Restablecer Contraseña?</a>
-          </span>
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input formControlName="Password" matInput [type]=" hide ? 'password' : 'text'" required />
-            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>
-                {{hide ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-        </button>
-        <mat-error *ngIf="!loginForm.controls['Password'].valid">
-            Contraseña es requerida
-          </mat-error>
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+  <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%" (ngSubmit)="onLogin()">
+    <mat-card class="mp-1">
+      <mat-card-title class="text-center">Iniciar sesión</mat-card-title>
+      <mat-card-subtitle class="text-center">
+        <mat-icon class="icon-sesion">
+            assignment_ind
+        </mat-icon>
+      </mat-card-subtitle>
+      <mat-card-content>
+       
+        <mat-form-field class="full-width" >
+          <mat-label>Usuario</mat-label>
+          <input name="username"
+            formControlName="UserName" autocomplete="on"
+            matInput
+            placeholder="Usuario" required
+          />
+          <mat-error *ngIf="!loginForm.controls['UserName'].valid">
+              Usuario es requerido
+            </mat-error>
         </mat-form-field>
-        </div>
-        <button mat-flat-button color="primary">Login</button>
-      </form>
-
-      <div class="button-row">
-        <a class="text-link" class="aLink" routerLink="/auth/register" >Registrar</a>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        <mat-form-field class="full-width" >
+          <mat-label>Contraseña</mat-label>
+          <input name="password" type="password"
+            formControlName="Password" autocomplete="on"
+            matInput
+            placeholder="Contraseña" required
+          />
+          <mat-error *ngIf="!loginForm.controls['Password'].valid">
+              Contraseña requerida
+            </mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-flat-button color="primary">Login</button>
+          <a class="text-link" class="aLink" routerLink="/auth/register" >Registrar</a>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </form>
+</div>

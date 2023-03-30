@@ -23,9 +23,7 @@ export class AutGuard implements CanActivate {
     }
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate() {
 
       const cookie = this.autService.isLoggedIn();
 

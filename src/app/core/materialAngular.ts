@@ -143,6 +143,13 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
       MatFormFieldModule
     ]
   })
-  export class materialAngular {}
+  export class materialAngular {
+    static forRoot(){
+      return {
+        NgModule:materialAngular, 
+        providers:[]
+      };
+    }
+  }
 
 
