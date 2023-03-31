@@ -51,10 +51,10 @@ export class UserService {
       );
     }
   
-    logout():void{
+    logout():Observable<any>{
       
       
-      this._http.post<JwtResponseI>(`http://localhost:50592/api/login/revoke-token`,{}).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`http://localhost:50592/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
         this.token='';
         this._cookie.deleteAll();
         this._router.navigateByUrl('/auth/login');

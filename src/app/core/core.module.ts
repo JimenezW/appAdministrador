@@ -7,6 +7,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { AccessGuard } from './Guards/acces.guards';
 import { AutGuard } from './Guards/aut.guards';
 import { NGXLogger } from 'ngx-logger';
+import { UrlInterceptor } from './interceptors/url.interceptor';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,11 @@ import { NGXLogger } from 'ngx-logger';
       provide : HTTP_INTERCEPTORS,
       useClass : SpinnerInterceptor,
       multi : true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptor,
+      multi: true
     },
     { provide: NGXLogger, useClass: NGXLogger },
     { provide: 'LOCALSTORAGE', useValue: window.localStorage }

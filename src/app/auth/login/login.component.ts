@@ -26,6 +26,8 @@ export class LoginComponent {
   });
   
   ngOnInit() {
+    if(this._autService.isLoggedIn())
+    this._autService.logout().subscribe();;
   }
 
   onLogin() {
