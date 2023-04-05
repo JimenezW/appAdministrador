@@ -21,6 +21,7 @@ export class UserService {
     private _router : Router) { }
 
     register(user:any):Observable<JwtResponseI>{
+      /*
       return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
@@ -28,10 +29,14 @@ export class UserService {
         }
       })
       );
+      */
+     return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).subscribe((res: any) => {
+        return res;
+     });
     }
   
     login(user:any):Observable<JwtResponseI>{
-      return this._http.post<JwtResponseI>(`http://localhost:50592/api/login/authenticate`,user).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<any>(`http://localhost:50592/api/login/authenticate`,user).pipe(tap((res:any)=>{
         
         if(res){
           //guardar token

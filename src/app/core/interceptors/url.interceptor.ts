@@ -28,8 +28,13 @@ export class UrlInterceptor implements HttpInterceptor{
         request: HttpRequest<any>,
         next: HttpHandler
       ): Observable<HttpEvent<any>> {
-        if(request.url === '/api/login')
-        return next.handle(request).pipe();
+        if(request.url === '/api/login'){
+            request = request.clone({
+                withCredentials : true
+            });
+
+            return next.handle(request).pipe();
+        }
 
         return next.handle(this.addAuthToken(request)).pipe(
             catchError((requestError : HttpErrorResponse) => {
