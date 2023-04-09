@@ -11,7 +11,7 @@ export class SpinnerService {
   constructor() {
   }
 
-  show() {
+  show() {debugger
     this.visibility.next(true);
   }
 

@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '
 import { Subscription, timer } from 'rxjs';
 import { AutGuard } from 'src/app/core/Guards/aut.guards';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-layout',
@@ -22,8 +23,7 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
   constructor(private changeDetectorRef: ChangeDetectorRef,
       private media: MediaMatcher,
       public spinnerService: SpinnerService,
-      //private authService: AuthenticationService,
-      private authGuard: AutGuard) {
+      private authService: UserService) {
 
       this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
       this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -37,11 +37,6 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
       this.isAdmin = true;//user.isAdmin;
       this.userName = "user.fullName";//user.fullName;
 
-      // Auto log-out subscription
-      const timer$ = timer(2000, 5000);
-      this.autoLogoutSubscription = timer$.subscribe(() => {
-          this.authGuard.canActivate();
-      });
   }
 
   ngOnDestroy(): void {
@@ -52,5 +47,9 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
       this.changeDetectorRef.detectChanges();
+  }
+
+  logout(){
+    this.authService.logout().subscribe();
   }
 }

@@ -91,7 +91,7 @@
             </div>
           </a>
   
-          <a mat-list-item [routerLink]="['/auth/login']">
+          <a mat-list-item (click)="logout()">
             <div class="d-inline-flex">
               <mat-icon mat-list-icon>exit_to_app</mat-icon>
               <span mat-line> Log out </span>

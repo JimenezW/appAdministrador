@@ -28,10 +28,12 @@ export class UrlInterceptor implements HttpInterceptor{
         request: HttpRequest<any>,
         next: HttpHandler
       ): Observable<HttpEvent<any>> {
+
+        request = request.clone({
+            withCredentials : true
+        });
+        
         if(request.url === '/api/login'){
-            request = request.clone({
-                withCredentials : true
-            });
 
             return next.handle(request).pipe();
         }
