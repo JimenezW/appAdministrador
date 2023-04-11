@@ -26,10 +26,7 @@ export class LoginComponent {
   });
   
   ngOnInit() {
-   /* if(this._autService.isLoggedIn())
-    this._autService.logout().subscribe(()=>{debugger
-      this._router.navigateByUrl('/auth/login');
-    });*/
+  
   }
 
   onLogin() {

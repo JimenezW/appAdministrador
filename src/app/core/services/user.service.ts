@@ -95,11 +95,14 @@ export class UserService {
     public getToken() : string {
       this.token = "";
 
-      let cookies = this._cookie.getAll();
+      //let cookies = this._cookie.getAll();
       
 
       if(this._cookie.get('access_token'))
       this.token = this._cookie.get('access_token');
+
+      if(this.token == "")
+      this._cookie.deleteAll();
       
       return this.token;
     }
@@ -108,6 +111,12 @@ export class UserService {
       this._cookie.set("currentUser", JSON.stringify(data));
     }
 
+    getCurrentUser(): UserI{
+      let userData : UserI = JSON.parse(this._cookie.get("currentUser"));
+
+      
+      return userData;
+    }
 
 
 }
