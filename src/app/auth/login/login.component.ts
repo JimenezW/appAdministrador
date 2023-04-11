@@ -26,6 +26,7 @@ export class LoginComponent {
   });
   
   ngOnInit() {
+  
   }
 
   onLogin() {
@@ -39,11 +40,15 @@ export class LoginComponent {
     formData.append("UserName", this.loginForm.controls['UserName'].value);
     formData.append("Password", this.loginForm.controls['Password'].value); 
 
-    this._autService.login(formData).subscribe(res=>{
-      if(res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
+    this._autService.login(formData).subscribe((response : any)=>{
+      let res = response.body;
+      if(res != undefined && res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
         this._router.navigateByUrl('/home');
       }
-    },(er)=>{this.notificationService.openSnackBar(er.error);},()=>{this.loading = false;});
+    },(er)=>{
+      this.notificationService.openSnackBar(er.error);
+    },
+      ()=>{this.loading = false;});
     
   }
 

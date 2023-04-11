@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -21,6 +21,7 @@ export class UserService {
     private _router : Router) { }
 
     register(user:any):Observable<JwtResponseI>{
+      
       return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
@@ -28,22 +29,29 @@ export class UserService {
         }
       })
       );
+      
+
     }
   
     login(user:any):Observable<JwtResponseI>{
-      return this._http.post<JwtResponseI>(`http://localhost:50592/api/login/authenticate`,user).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<any>(`/api/login/authenticate`,user,{
+        observe: 'response',
+      }).pipe(tap((res:any)=>{
         
-        if(res){
+        if(res && res.body){
+
+
+          let body = res.body;
           //guardar token
-          this.saveToken(res.jwtToken,res.expireAt);
+          //this.saveToken(body.jwtToken,body.expireAt);
 
           let user = {
-            id : res.id,
-            fullName: res.username,
-            expireAt : res.expireAt
+            id : body.id,
+            fullName: body.username,
+            expireAt : body.expireAt
           };
           this.saveUser(user);
-  
+          
         }
       }),catchError((err)=>{
         return of(err);
@@ -51,10 +59,9 @@ export class UserService {
       );
     }
   
-    logout():void{
+    logout():Observable<any>{
       
-      
-      this._http.post<JwtResponseI>(`http://localhost:50592/api/login/revoke-token`,{}).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
         this.token='';
         this._cookie.deleteAll();
         this._router.navigateByUrl('/auth/login');
@@ -87,8 +94,15 @@ export class UserService {
   
     public getToken() : string {
       this.token = "";
+
+      //let cookies = this._cookie.getAll();
+      
+
       if(this._cookie.get('access_token'))
       this.token = this._cookie.get('access_token');
+
+      if(this.token == "")
+      this._cookie.deleteAll();
       
       return this.token;
     }
@@ -97,6 +111,12 @@ export class UserService {
       this._cookie.set("currentUser", JSON.stringify(data));
     }
 
+    getCurrentUser(): UserI{
+      let userData : UserI = JSON.parse(this._cookie.get("currentUser"));
+
+      
+      return userData;
+    }
 
 
 }
