@@ -29,6 +29,10 @@ export class UrlInterceptor implements HttpInterceptor{
         next: HttpHandler
       ): Observable<HttpEvent<any>> {
 
+
+        if(request.url.includes('search'))
+            return next.handle(request).pipe();
+
         request = request.clone({
             withCredentials : true
         });
