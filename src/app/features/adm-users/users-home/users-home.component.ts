@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { AdmUserService } from 'src/app/core/services/adm-user/adm-user.service';
 import { UserI } from 'src/app/data/UserI.Interface';
 
 @Component({
@@ -15,35 +16,34 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
   @ViewChild(MatSort) sort: any = MatSort;
-
-  displayedColumns: string[] = ['created', 'state', 'number', 'title'];
-  exampleDatabase: ExampleHttpDatabase | null | undefined;
-  data: GithubIssue[] = [];
-  
-  displayedColumnsU: String[] = ['fullName', 'email', 'telefono', 'acciones'];
-  dataU: UserI[] = [];
+ 
+  displayedColumns: String[] = ['number','fullName', 'email', 'telefono', 'acciones'];
+  data: UserI[] = [];
 
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient, 
+    private _admiService : AdmUserService) {}
 
   ngAfterViewInit() {
-    this.exampleDatabase = new ExampleHttpDatabase(this._httpClient);
 
-    // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    //this.paginator._intl.itemsPerPageLabel = 'Items pro Seite';
+    //this.paginator._intl.nextPageLabel = 'Nächste';
+    //this.paginator._intl.previousPageLabel = 'Vorherige';
 
-    merge(this.sort.sortChange, this.paginator.page)
+      merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
+          return this._admiService!.UserList(
             this.sort.active,
             this.sort.direction,
             this.paginator.pageIndex,
+            this.paginator.pageSize
           ).pipe(catchError(() => observableOf(null)));
         }),
         map(data => {
@@ -55,11 +55,9 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
             return [];
           }
 
-          // Only refresh the result length if there is new data. In case of rate
-          // limit errors, we do not want to reset the paginator to zero, as that
-          // would prevent users from re-triggering requests.
-          this.resultsLength = data.total_count;
-          return data.items;
+          this.resultsLength = 4;//data.total_count;
+
+          return data.data;
         }),
       )
       .subscribe(data => (this.data = data));
@@ -69,27 +67,3 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
 
 }
 
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
-}
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDatabase {
-  constructor(private _httpClient: HttpClient) {}
-
-  getRepoIssues(sort: string, order: SortDirection, page: number): Observable<GithubApi> {
-    const href = '/search/issues';
-    const requestUrl = `${href}?q=repo:angular/components&sort=${sort}&order=${order}&page=${
-      page + 1
-    }`;
-
-    return this._httpClient.get<GithubApi>(requestUrl);
-  }
-}

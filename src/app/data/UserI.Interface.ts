@@ -6,5 +6,6 @@ export interface UserI {
     username:string,
     isAdmin:boolean,
     fullName:string,
+    telefono:string,
     expireAt:string
 }

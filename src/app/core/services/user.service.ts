@@ -22,7 +22,7 @@ export class UserService {
 
     register(user:any):Observable<JwtResponseI>{
       
-      return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
           this.saveToken(res.jwtToken,res.expireAt);

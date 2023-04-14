@@ -6,7 +6,7 @@
       </div>
   
       <div class="container" fxLayout="row" fxLayoutAlign="center none">
-        <div fxFlex="50%" class="text-center no-records animate">
+        <div fxFlex="50%" class="text-center animate">
           <p>users-home works!</p>
           <div class="example-container mat-elevation-z8">
             <div class="example-loading-shade"
@@ -17,7 +17,11 @@
               </div>
             </div>
             <div class="example-table-container">
-              <table mat-table [dataSource]="dataU" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+              <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                <ng-container matColumnDef="number">
+                  <th mat-header-cell *matHeaderCellDef>#</th>
+                  <td mat-cell *matCellDef="let row; let i = index">{{i+1}}</td>
+                </ng-container>
                 <!-- fullName Column -->
                 <ng-container matColumnDef="fullName">
                   <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
@@ -26,72 +30,36 @@
                 <!-- Email Column -->
                 <ng-container matColumnDef="email">
                   <th mat-header-cell *matHeaderCellDef>Email</th>
-                  <td mat-cell *matCellDef="let row">{{row.email}}</td>
+                  <td mat-cell *matCellDef="let row">{{row.email == null ? '-': row.email}}</td>
                 </ng-container>
                 <!-- telefono Column -->
                 <ng-container matColumnDef="telefono">
                   <th mat-header-cell *matHeaderCellDef>Telefono</th>
-                  <td mat-cell *matCellDef="let row">{{row.telefono}}</td>
+                  <td mat-cell *matCellDef="let row">{{row.telefono == null ? '-': row.telefono}}</td>
                 </ng-container>
                 <!-- acciones Column -->
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                  <td mat-cell *matCellDef="let row">{{row.acciones}}</td>
+                  <td mat-cell *matCellDef="let row" class="btn-acciones">
+                      <button mat-icon-button color="primary" aria-label="editar">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button  color="primary" aria-label="permiso">
+                        <mat-icon>format_list_bulleted</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" aria-label="Rclave">
+                        <mat-icon>password</mat-icon>
+                      </button>
+                  </td>
                 </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsU"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsU;"></tr>
-              </table>
-            </div>
-            <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator>
-          </div>
-          <mat-divider></mat-divider>
-          <div class="example-container mat-elevation-z8">
-            <div class="example-loading-shade"
-                 *ngIf="isLoadingResults || isRateLimitReached">
-              <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-              <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
-                GitHub's API rate limit has been reached. It will be reset in one minute.
-              </div>
-            </div>
-          
-            <div class="example-table-container">
-          
-              <table mat-table [dataSource]="data" class="example-table"
-                     matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
-                <!-- Number Column -->
-                <ng-container matColumnDef="number">
-                  <th mat-header-cell *matHeaderCellDef>#</th>
-                  <td mat-cell *matCellDef="let row">{{row.number}}</td>
-                </ng-container>
-          
-                <!-- Title Column -->
-                <ng-container matColumnDef="title">
-                  <th mat-header-cell *matHeaderCellDef>Title</th>
-                  <td mat-cell *matCellDef="let row">{{row.title}}</td>
-                </ng-container>
-          
-                <!-- State Column -->
-                <ng-container matColumnDef="state">
-                  <th mat-header-cell *matHeaderCellDef>State</th>
-                  <td mat-cell *matCellDef="let row">{{row.state}}</td>
-                </ng-container>
-          
-                <!-- Created Column -->
-                <ng-container matColumnDef="created">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                    Created
-                  </th>
-                  <td mat-cell *matCellDef="let row">{{row.created_at | date}}</td>
-                </ng-container>
-          
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-          
-            <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator>
+            <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" aria-label="Select page "></mat-paginator>
           </div>
+          
         </div>
         <mat-icon> </mat-icon>
       </div>
