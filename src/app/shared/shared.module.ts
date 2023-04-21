@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { materialAngular } from '../core/materialAngular';
+import { DialogshowComponent } from '../shared/dialogshow/dialogshow.component';
 
 
 
 @NgModule({
   declarations: [
-     LayoutComponent
+     LayoutComponent,
+     DialogshowComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { materialAngular } from '../core/materialAngular';
     materialAngular
   ],
   exports: [
-    materialAngular
+    materialAngular,
+    DialogshowComponent
   ]
 })
 export class SharedModule { }

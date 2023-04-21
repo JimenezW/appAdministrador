@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { AdmUserService } from 'src/app/core/services/adm-user/adm-user.service';
 import { UserI } from 'src/app/data/UserI.Interface';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-users-home',
@@ -25,6 +27,7 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
   isRateLimitReached = false;
 
   constructor(private _httpClient: HttpClient, 
+    private dialog:MatDialog,
     private _admiService : AdmUserService) {}
 
   ngAfterViewInit() {
@@ -65,5 +68,12 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
 
   ngOnInit(){}
 
+  newUser(){
+    const dialogRef = this.dialog.open(CreateUserComponent);
+
+    dialogRef.afterClosed().subscribe((arg)=> {
+      
+    });
+  }
 }
 

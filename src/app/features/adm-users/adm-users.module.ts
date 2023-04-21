@@ -5,12 +5,15 @@ import { materialAngular } from 'src/app/core/materialAngular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdmUsersRoutingModule } from './adm-rotuing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 
 
 @NgModule({
   declarations: [
-    UsersHomeComponent
+    UsersHomeComponent,
+    CreateUserComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +21,8 @@ import { AdmUsersRoutingModule } from './adm-rotuing.module';
     ReactiveFormsModule,
     materialAngular,
     SharedModule,
-    AdmUsersRoutingModule
+    AdmUsersRoutingModule,
+    HttpClientModule
   ]
 })
 export class AdmUsersModule { }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { materialAngular } from 'src/app/core/materialAngular';
 
 
 
@@ -12,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
+    materialAngular,
     DashboardRoutingModule,
     SharedModule
   ]
