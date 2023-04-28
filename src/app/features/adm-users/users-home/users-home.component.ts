@@ -75,5 +75,7 @@ export class UsersHomeComponent implements OnInit, AfterViewInit{
       
     });
   }
+
+  EditUser(){}
 }
 

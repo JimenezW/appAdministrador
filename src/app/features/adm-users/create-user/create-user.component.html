@@ -1,2 +1,46 @@
-<p>create-user works!</p>
-<button type="button" (click)="close()">Cerrar</button>
+<h1 mat-dialog-title>{{isEdit ? 'Editar':'Crear'}} usuario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="userForm">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Usuario</mat-label>
+                        <input type="text" matInput formControlName="UserName" placeholder="Usuario" />
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" matInput formControlName="Password" placeholder="Contraseña" />
+                    </mat-form-field>
+                </div>
+            
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput formControlName="FirstName" placeholder="Nombre" />
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Apellido</mat-label>
+                        <input type="text" matInput formControlName="LastName" placeholder="Apellido" />
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="Email" placeholder="Email" />
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button type="button" (click)="close()">Cerrar</button>
+</div>
