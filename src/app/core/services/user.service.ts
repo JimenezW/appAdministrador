@@ -23,7 +23,7 @@ export class UserService {
 
     register(user:any):Observable<JwtResponseI>{
 
-      return this._http.post<JwtResponseI>(`${environment.apiUrl}/api/register`,user).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
           this.saveToken(res.jwtToken,res.expireAt);
@@ -35,19 +35,19 @@ export class UserService {
     }
 
     login(user:any):Observable<JwtResponseI>{
-      return this._http.post<any>(`${environment.apiUrl}/api/auth/login`,user,{
+      return this._http.post<any>(`/api/auth/login`,user,{
         observe: 'response',
       }).pipe(tap((res:any)=>{
 
-        if(res && res.body){
+        if(res && res?.body?.ok){
 
 
-          let body = res.body;
+          let body = res.body.data;
           //guardar token
-          //this.saveToken(body.jwtToken,body.expireAt);
+          this.saveToken(body.accessToken,body.expireAt);
 
           let user = {
-            id : body.id,
+            id : 'sad',
             fullName: body.username,
             expireAt : body.expireAt
           };

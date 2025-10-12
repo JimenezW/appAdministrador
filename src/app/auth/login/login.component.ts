@@ -44,7 +44,7 @@ export class LoginComponent {
     this._autService.login(data).subscribe({
       next: (response: any) => {
         let res = response.body;
-        if (res != undefined && res.accessToken != undefined && res.accessToken != null && res.accessToken != '') {
+        if (res != undefined && res?.ok) {
           this._router.navigateByUrl('/home');
         }
       },
