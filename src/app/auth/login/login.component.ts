@@ -13,43 +13,44 @@ export class LoginComponent {
   hide: boolean = false;
   loading!: boolean;
 
-  constructor(private fb: FormBuilder, 
-    private _autService : UserService, 
+  constructor(private fb: FormBuilder,
+    private _autService : UserService,
     private _router : Router,
     private notificationService: NotificationService) {
   }
 
-  
+
   loginForm: FormGroup = this.fb.group({
     UserName: ['', [Validators.required]],
-    Password: ['', [Validators.required, Validators.minLength(6)]]
+    Password: ['', [Validators.required, Validators.minLength(4)]]
   });
-  
+
   ngOnInit() {
-  
+
   }
 
   onLogin() {
-    
+
     if (!this.loginForm.valid) {
       return;
     }
     this.loading = true;
-    let formData = new FormData();
 
-    formData.append("UserName", this.loginForm.controls['UserName'].value);
-    formData.append("Password", this.loginForm.controls['Password'].value); 
+    const data ={
+      email: this.loginForm.controls['UserName'].value,
+      password: this.loginForm.controls['Password'].value
+    };
 
-    this._autService.login(formData).subscribe((response : any)=>{
+    this._autService.login(data).subscribe((response : any)=>{
       let res = response.body;
-      if(res != undefined && res.jwtToken != undefined && res.jwtToken  != null && res.jwtToken != ''){
+      if(res != undefined && res.accessToken != undefined && res.accessToken  != null && res.accessToken != ''){
         this._router.navigateByUrl('/home');
       }
     },(er)=>{
       this.notificationService.openSnackBar(er.error);
     },
       ()=>{this.loading = false;});
-    
+
   }
 
   onRegister(){

@@ -21,23 +21,23 @@ export class UserService {
     private _router : Router) { }
 
     register(user:any):Observable<JwtResponseI>{
-      
-      return this._http.post<JwtResponseI>(`http://localhost:50592/api/register`,user).pipe(tap((res:JwtResponseI)=>{
+
+      return this._http.post<JwtResponseI>(`http://localhost:3000/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
           this.saveToken(res.jwtToken,res.expireAt);
         }
       })
       );
-      
+
 
     }
-  
+
     login(user:any):Observable<JwtResponseI>{
-      return this._http.post<any>(`/api/login/authenticate`,user,{
+      return this._http.post<any>(`/api/auth/login`,user,{
         observe: 'response',
       }).pipe(tap((res:any)=>{
-        
+
         if(res && res.body){
 
 
@@ -51,59 +51,59 @@ export class UserService {
             expireAt : body.expireAt
           };
           this.saveUser(user);
-          
+
         }
       }),catchError((err)=>{
         return of(err);
       })
       );
     }
-  
+
     logout():Observable<any>{
-      
+
       return this._http.post<JwtResponseI>(`/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
         this.token='';
         this._cookie.deleteAll();
         this._router.navigateByUrl('/auth/login');
-        
+
       }),catchError((err)=>{
         return of(err);
       })
       );
 
     }
-  
+
     private saveToken(token:string, expiresIn:string):void{
       this.token=token;
-  
+
       //let expireInTem : number = +expiresIn
-  
+
       let dateExpire = new Date(expiresIn).setHours(-24);
-      
+
       //dateExpire.setSeconds(expireInTem);
-  
+
       this._cookie.set('access_token',token,dateExpire,'/')
       this._cookie.set('dateExpire',expiresIn)
     }
-  
+
     public isLoggedIn() {
       const token: string = this.getToken();
-  
+
       return token != '' && !this.jwtHelper.isTokenExpired(token);
     }
-  
+
     public getToken() : string {
       this.token = "";
 
       //let cookies = this._cookie.getAll();
-      
+
 
       if(this._cookie.get('access_token'))
       this.token = this._cookie.get('access_token');
 
       if(this.token == "")
       this._cookie.deleteAll();
-      
+
       return this.token;
     }
 
@@ -114,7 +114,7 @@ export class UserService {
     getCurrentUser(): UserI{
       let userData : UserI = JSON.parse(this._cookie.get("currentUser"));
 
-      
+
       return userData;
     }
 
