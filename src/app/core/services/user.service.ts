@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { UserI } from 'src/app/data/UserI.Interface';
 import { JwtResponseI } from 'src/app/data/JwtResponseI.Interface';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class UserService {
 
     register(user:any):Observable<JwtResponseI>{
 
-      return this._http.post<JwtResponseI>(`http://localhost:3000/api/register`,user).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`${environment.apiUrl}/api/register`,user).pipe(tap((res:JwtResponseI)=>{
         if(res){
           //guardar token
           this.saveToken(res.jwtToken,res.expireAt);
@@ -34,7 +35,7 @@ export class UserService {
     }
 
     login(user:any):Observable<JwtResponseI>{
-      return this._http.post<any>(`/api/auth/login`,user,{
+      return this._http.post<any>(`${environment.apiUrl}/api/auth/login`,user,{
         observe: 'response',
       }).pipe(tap((res:any)=>{
 
@@ -61,7 +62,7 @@ export class UserService {
 
     logout():Observable<any>{
 
-      return this._http.post<JwtResponseI>(`/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
+      return this._http.post<JwtResponseI>(`${environment.apiUrl}/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
         this.token='';
         this._cookie.deleteAll();
         this._router.navigateByUrl('/auth/login');

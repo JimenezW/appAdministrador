@@ -34,8 +34,10 @@ export class RegisterComponent {
     formData.append('LastName',this.registerForm.controls["LastName"].value);
     formData.append('Email',this.registerForm.controls["Email"].value);
 
-    this._autService.register(formData).subscribe((res)=> {
-      this._router.navigateByUrl('/auth/login');
+    this._autService.register(formData).subscribe({
+      next: (res) => {
+        this._router.navigateByUrl('/auth/login');
+      }
     });
   }
 }
