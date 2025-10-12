@@ -41,15 +41,20 @@ export class LoginComponent {
       password: this.loginForm.controls['Password'].value
     };
 
-    this._autService.login(data).subscribe((response : any)=>{
-      let res = response.body;
-      if(res != undefined && res.accessToken != undefined && res.accessToken  != null && res.accessToken != ''){
-        this._router.navigateByUrl('/home');
+    this._autService.login(data).subscribe({
+      next: (response: any) => {
+        let res = response.body;
+        if (res != undefined && res.accessToken != undefined && res.accessToken != null && res.accessToken != '') {
+          this._router.navigateByUrl('/home');
+        }
+      },
+      error: (er) => {
+        this.notificationService.openSnackBar(er.error);
+      },
+      complete: () => {
+        this.loading = false;
       }
-    },(er)=>{
-      this.notificationService.openSnackBar(er.error);
-    },
-      ()=>{this.loading = false;});
+    });
 
   }
 
