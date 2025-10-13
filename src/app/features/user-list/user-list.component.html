@@ -1,0 +1,11 @@
+<div class="container mt-4">
+  <h2>Lista de Usuarios</h2>
+  <p>Este es un ejemplo de uso del componente de tabla dinámica.</p>
+
+  <app-dynamic-table
+    [data]="users"
+    [columns]="columns"
+    [options]="gridOptions"
+    (action)="handleActionEvent($event)">
+  </app-dynamic-table>
+</div>
