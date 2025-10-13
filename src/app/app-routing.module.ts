@@ -6,16 +6,17 @@ import { AutGuard } from './core/Guards/aut.guards';
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
   { path: 'auth', loadChildren:()=> import('./auth/auth.module').then(x => x.AuthModule), canActivate:[AutGuard] },
-  { path: 'dashboard',loadChildren:()=>import('./features/dashboard/dashboard.module').then(x=>x.DashboardModule), canActivate:[AccessGuard]},
+  { path: 'dashboard',loadChildren:()=>import('./features/dashboard/dashboard.module').then(x => x.DashboardModule), canActivate:[AccessGuard]},
+  { path: 'users',loadChildren:()=>import('./features/usuarios/usuarios.module').then(x => x.UsuariosModule), canActivate:[AccessGuard]},
   { path: '**', redirectTo:'dashboard',pathMatch:'full'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { 
-    preloadingStrategy: PreloadAllModules,  
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'top',
     anchorScrolling: 'enabled',
-    initialNavigation: 'enabledBlocking' 
+    initialNavigation: 'enabledBlocking'
   })],
   exports: [RouterModule]
 })
