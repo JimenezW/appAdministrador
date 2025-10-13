@@ -12,11 +12,13 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { materialAngular } from './core/materialAngular';
 import { LoggerModule } from 'ngx-logger';
 import { environment } from '../environments/environment';
+import { UserListComponent } from './features/user-list/user-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
