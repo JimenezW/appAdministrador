@@ -4,7 +4,6 @@ import { materialAngular } from './materialAngular';
 import { UserService } from './services/user.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
-import { AccessGuard } from './Guards/acces.guards';
 import { AutGuard } from './Guards/aut.guards';
 import { NGXLogger } from 'ngx-logger';
 import { UrlInterceptor } from './interceptors/url.interceptor';
@@ -18,7 +17,6 @@ import { UrlInterceptor } from './interceptors/url.interceptor';
   ],
   providers: [
     AutGuard,
-    AccessGuard,
     UserService,
     {
       provide : HTTP_INTERCEPTORS,

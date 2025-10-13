@@ -45,7 +45,7 @@ export class LoginComponent {
       next: (response: any) => {
         let res = response.body;
         if (res != undefined && res?.ok) {
-          this._router.navigateByUrl('/home');
+          this._router.navigateByUrl('/dashboard');
         }
       },
       error: (er) => {
