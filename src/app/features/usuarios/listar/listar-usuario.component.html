@@ -1,1 +1,26 @@
-|<h1>Usuarios</h1>
+<div fxFlex="95%">
+  <div class="container">
+    <h2>Usuarios</h2>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <button mat-icon-button color="primary" aria-label="Agregar">
+          <mat-icon>add</mat-icon>
+        </button>
+      <button mat-icon-button color="primary" aria-label="Example icon button with a bookmark icon">
+          <mat-icon>filter_alt</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+
+        <app-dynamic-table
+        [data]="users"
+        [columns]="columns"
+        [options]="gridOptions"
+        (action)="handleActionEvent($event)">
+      </app-dynamic-table>
+
+
+  </div>
+</div>

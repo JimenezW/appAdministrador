@@ -32,10 +32,10 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-      const user = this.authService.getCurrentUser();
+    //const user = this.authService.getCurrentUser();
 
-      this.isAdmin = user.isAdmin;
-      this.userName = user.fullName;
+    //this.isAdmin = user.isAdmin;
+    //this.userName = user.fullName;
 
   }
 

@@ -12,13 +12,12 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { materialAngular } from './core/materialAngular';
 import { LoggerModule } from 'ngx-logger';
 import { environment } from '../environments/environment';
-import { UserListComponent } from './features/user-list/user-list.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +26,7 @@ import { UserListComponent } from './features/user-list/user-list.component';
     HttpClientModule,
     CoreModule,
     NgbModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     materialAngular,
     LoggerModule.forRoot({
       serverLoggingUrl: `http://my-api/logs`,
