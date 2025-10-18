@@ -29,7 +29,7 @@ export class GridUsuariosConfig implements GridConfiguracion {
         filter: false
       },
       {
-        id: 'acccion',
+        id: 'accion',
         title: 'Acciones',
         format: 'accion',
         sortable: false,

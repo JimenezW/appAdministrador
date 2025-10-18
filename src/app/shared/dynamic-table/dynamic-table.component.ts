@@ -31,7 +31,7 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
   // 🔹 Inicialización de columnas y datasource
   ngOnInit(): void {
     if (!this.gridConfig) return;
-    this.displayedColumns = [...this.gridConfig.columns.map(c => c.id), 'actions'];
+    this.displayedColumns = [...this.gridConfig.columns.map(c => c.id)];
     this.dataSource.data = this.gridConfig.data ?? [];
 
     // 👉 Exponer referencia pública al componente

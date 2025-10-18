@@ -27,8 +27,6 @@
           <span *ngSwitchCase="'currency'">{{ row[col.id] | currency: 'USD' }}</span>
           <span *ngSwitchDefault>{{ row[col.id] }}</span>
         </div>
-
-        <!-- Columna de Acciones -->
         <div *ngIf="col.format === 'accion'">
           <ng-container *ngFor="let accion of gridConfig.rowconfig">
             <button mat-icon-button color="{{accion.color}}" (click)="onActionClick(accion.esAccion, row)" [matTooltip]="accion.totooltip ?? '-'">
@@ -39,6 +37,9 @@
 
       </td>
     </ng-container>
+
+    <!-- Columna de Acciones -->
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
