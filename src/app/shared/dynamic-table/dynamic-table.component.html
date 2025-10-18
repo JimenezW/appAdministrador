@@ -35,11 +35,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator *ngIf="options.pagination"
-                 [length]="options.pagination.totalItems"
-                 [pageSize]="options.pagination.pageSize"
-                 [pageSizeOptions]="options.pagination.pageSizeOptions"
-                 (page)="pageChange.emit($event)"
-                 showFirstLastButtons>
+  <mat-paginator *ngIf="options?.pagination"
+               [length]="options.pagination.totalItems"
+               [pageSize]="options.pagination.pageSize"
+               [pageSizeOptions]="options.pagination.pageSizeOptions"
+               (page)="pageChange.emit($event)"
+               showFirstLastButtons>
   </mat-paginator>
+
 </div>

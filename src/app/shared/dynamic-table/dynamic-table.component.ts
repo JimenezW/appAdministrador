@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -14,7 +14,16 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() data: any[] = [];
   @Input() columns: ColumnDefinition[] = [];
-  @Input() options: GridOptions = {};
+  @Input() options: GridOptions = {
+      sorting: true,
+      filtering: true,
+      pagination: {
+        pageSize: 5,
+        pageSizeOptions: [5, 10, 20],
+        totalItems: 0
+      }
+  };
+
   @Output() action: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
   @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
   @Output() sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
@@ -25,22 +34,39 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: string[] = [];
 
-  constructor() { }
+  constructor(private cdRef: ChangeDetectorRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && this.data) {
       this.dataSource.data = this.data;
+    }
+
+    if (changes['options'] && this.options.pagination != undefined) {
+      if (this.paginator) {
+        this.paginator.length = this.options.pagination.totalItems;
+        this.paginator.pageSize = this.options.pagination.pageSize;
+        this.paginator.pageSizeOptions = this.options.pagination.pageSizeOptions;
+      }
+
+      // ⚡ Forzamos re-render del paginator
+      this.cdRef.detectChanges();
     }
   }
 
   ngOnInit(): void {
     this.displayedColumns = [...this.columns.map(c => c.id), 'actions'];
     this.dataSource.data = this.data;
+
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    // valores por defecto (garantiza que paginator siempre tenga algo)
+    this.paginator.length = this.options.pagination.totalItems;
+    this.paginator.pageSize = this.options.pagination.pageSize;
+    this.paginator.pageSizeOptions = this.options.pagination.pageSizeOptions;
   }
 
   onActionClick(action: 'edit' | 'delete', rowData: any): void {

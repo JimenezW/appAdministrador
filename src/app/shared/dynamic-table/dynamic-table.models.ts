@@ -22,7 +22,7 @@ export interface ColumnDefinition {
  */
 export interface GridOptions {
   /** Configuración de la paginación (opcional). */
-  pagination?: {
+  pagination: {
     pageSize: number;
     pageSizeOptions: number[];
     totalItems?: number;

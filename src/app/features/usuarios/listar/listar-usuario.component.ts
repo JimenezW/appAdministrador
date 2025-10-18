@@ -43,9 +43,15 @@ export class ListarUsuarioComponent implements OnInit {
       .subscribe({
       next: (response: any) => {
         this.users = response.data;
-        if (this.gridOptions.pagination) {
-          this.gridOptions.pagination.totalItems = response.totalItems;
-        }
+        this.gridOptions = {
+          ...this.gridOptions,
+          pagination: {
+            ...this.gridOptions.pagination,
+            totalItems: response.total,
+            pageSize: response.items
+          }
+        };
+
       },
       error: (err) => {
         //this.notificationService.openSnackBar(er.error);
