@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'auth', loadChildren:()=> import('./auth/auth.module').then(x => x.AuthModule), canActivate:[AutGuard] },
   { path: 'dashboard',loadChildren:()=>import('./features/dashboard/dashboard.module').then(x => x.DashboardModule), canActivate:[AccessGuard]},
   { path: 'users',loadChildren:()=>import('./features/usuarios/usuarios.module').then(x => x.UsuariosModule), canActivate:[AccessGuard]},
+  { path: 'roles', loadChildren:()=>import('./features/roles/roles.module').then(x=> x.RolesModule), canActivate:[AccessGuard]},
+  { path: 'permisos', loadChildren:()=>import('./features/permisos/permisos.module').then(x=> x.PermisosModule), canActivate:[AccessGuard]},
   { path: '**', redirectTo:'dashboard',pathMatch:'full'}
 ];
 

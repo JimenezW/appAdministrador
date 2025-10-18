@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: ListarUsuarioComponent },
-      { path: 'create', component: CrearUsuarioComponent}
+      { path: 'crear', component: CrearUsuarioComponent}
     ]
   }
 ];
