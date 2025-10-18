@@ -2,6 +2,7 @@
  * Define el formato de los datos que se mostrarán en una columna.
  */
 export type ColumnFormat = 'text' | 'date' | 'currency' | 'accion';
+export type AccionFormat = 'editar' | 'eliminar' | 'consulta' | 'descarga' | 'click';
 
 /**
  * Define la estructura de una columna en la tabla dinámica.
@@ -40,7 +41,7 @@ export interface GridOptions {
  */
 export interface ActionEvent {
   /** El tipo de acción a realizar ('edit' o 'delete'). */
-  action: 'edit' | 'delete';
+  action: string;
   /** Los datos de la fila sobre la que se realizó la acción. */
   rowData: any;
 }
@@ -50,8 +51,11 @@ export interface ActionEvent {
  */
 export interface RowConfiguracion {
   idColumn: string;
-  esAccion: boolean;
+  esAccion: AccionFormat;
   tipo : 'link' | 'btn' | 'icon-btn' | 'fecha' | 'texto' | 'numero' | 'moneda';
+  icon?: string;
+  color?: 'primary' | 'warn'
+  totooltip?: string;
   activo: boolean;
   visible: boolean;
   linkValue?: string

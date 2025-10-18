@@ -27,9 +27,37 @@ export class GridUsuariosConfig implements GridConfiguracion {
         format: 'date',
         sortable: true,
         filter: false
+      },
+      {
+        id: 'acccion',
+        title: 'Acciones',
+        format: 'accion',
+        sortable: false,
+        filter: false
       }
     ];
-  rowconfig?: RowConfiguracion[] | undefined;
+  rowconfig?: RowConfiguracion[] = [
+    {
+      idColumn:'id',
+      tipo: 'icon-btn',
+      icon:'delete',
+      totooltip:'eliminar',
+      color: 'warn',
+      activo: true,
+      visible:true,
+      esAccion: 'eliminar'
+    },
+    {
+      idColumn:'id',
+      tipo: 'icon-btn',
+      icon:'edit',
+      color: 'primary',
+      totooltip:'editar',
+      activo: true,
+      visible:true,
+      esAccion: 'editar'
+    }
+  ];
   options: GridOptions = {
       sorting: true,
       filtering: true,

@@ -63,7 +63,7 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.cdRef.detectChanges();
   }
 
-  onActionClick(action: 'edit' | 'delete', rowData: any): void {
+  onActionClick(action: string, rowData: any): void {
     this.action.emit({ action, rowData });
   }
 
