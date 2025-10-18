@@ -25,6 +25,7 @@ export interface GridOptions {
   pagination?: {
     pageSize: number;
     pageSizeOptions: number[];
+    totalItems?: number;
   };
   /** Habilita el ordenamiento en las columnas marcadas como 'sortable' (opcional, por defecto false). */
   sorting?: boolean;

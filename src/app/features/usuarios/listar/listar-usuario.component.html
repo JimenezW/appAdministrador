@@ -18,7 +18,9 @@
         [data]="users"
         [columns]="columns"
         [options]="gridOptions"
-        (action)="handleActionEvent($event)">
+        (action)="handleActionEvent($event)"
+        (pageChange)="handlePageEvent($event)"
+        (sortChange)="handleSortEvent($event)">
       </app-dynamic-table>
 
 
