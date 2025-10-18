@@ -15,9 +15,7 @@
     <mat-divider></mat-divider>
 
         <app-dynamic-table
-        [data]="users"
-        [columns]="columns"
-        [options]="gridOptions"
+        [gridConfig]="gridUser"
         (action)="handleActionEvent($event)"
         (pageChange)="handlePageEvent($event)"
         (sortChange)="handleSortEvent($event)">

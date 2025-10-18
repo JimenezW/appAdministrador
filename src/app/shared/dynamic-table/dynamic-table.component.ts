@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnDefinition, GridOptions, ActionEvent } from './dynamic-table.models';
+import { GridConfiguracion } from './GridConfiguracion';
 
 @Component({
   selector: 'app-dynamic-table',
@@ -12,17 +13,7 @@ import { ColumnDefinition, GridOptions, ActionEvent } from './dynamic-table.mode
 })
 export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
 
-  @Input() data: any[] = [];
-  @Input() columns: ColumnDefinition[] = [];
-  @Input() options: GridOptions = {
-      sorting: true,
-      filtering: true,
-      pagination: {
-        pageSize: 5,
-        pageSizeOptions: [5, 10, 20],
-        totalItems: 0
-      }
-  };
+  @Input() gridConfig!: GridConfiguracion;
 
   @Output() action: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
   @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
@@ -36,37 +27,40 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(private cdRef: ChangeDetectorRef) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] && this.data) {
-      this.dataSource.data = this.data;
-    }
 
-    if (changes['options'] && this.options.pagination != undefined) {
-      if (this.paginator) {
-        this.paginator.length = this.options.pagination.totalItems;
-        this.paginator.pageSize = this.options.pagination.pageSize;
-        this.paginator.pageSizeOptions = this.options.pagination.pageSizeOptions;
-      }
-
-      // ⚡ Forzamos re-render del paginator
-      this.cdRef.detectChanges();
-    }
-  }
-
+  // 🔹 Inicialización de columnas y datasource
   ngOnInit(): void {
-    this.displayedColumns = [...this.columns.map(c => c.id), 'actions'];
-    this.dataSource.data = this.data;
+    if (!this.gridConfig) return;
+    this.displayedColumns = [...this.gridConfig.columns.map(c => c.id), 'actions'];
+    this.dataSource.data = this.gridConfig.data ?? [];
 
+    // 👉 Exponer referencia pública al componente
+    this.gridConfig.component = this;
   }
 
   ngAfterViewInit(): void {
-    //this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    if (this.gridConfig.options?.pagination) {
+      this.syncPaginatorValues();
+    }
+  }
 
-    // valores por defecto (garantiza que paginator siempre tenga algo)
-    this.paginator.length = this.options.pagination.totalItems;
-    this.paginator.pageSize = this.options.pagination.pageSize;
-    this.paginator.pageSizeOptions = this.options.pagination.pageSizeOptions;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['gridConfig'] && this.gridConfig) {
+      this.dataSource.data = this.gridConfig.data ?? [];
+      this.syncPaginatorValues();
+    }
+  }
+
+    // 🔹 Sincroniza los valores de paginación
+  private syncPaginatorValues(): void {
+    if (!this.paginator || !this.gridConfig.options?.pagination) return;
+
+    const { totalItems = 0, pageSize = 5, pageSizeOptions = [5, 10, 20] } = this.gridConfig.options.pagination;
+    this.paginator.length = totalItems;
+    this.paginator.pageSize = pageSize;
+    this.paginator.pageSizeOptions = pageSizeOptions;
+    this.cdRef.detectChanges();
   }
 
   onActionClick(action: 'edit' | 'delete', rowData: any): void {
@@ -80,5 +74,27 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+    // ============================================================
+  // 🔸 MÉTODOS PÚBLICOS ACCESIBLES DESDE gridConfig.component
+  // ============================================================
+
+  /** Limpia el filtro y reinicia la paginación */
+  public limpiar(): void {
+    this.dataSource.filter = '';
+    if (this.paginator) this.paginator.firstPage();
+  }
+
+  /** Actualiza los datos del grid */
+  public actualizarDatos(nuevaData: any[]): void {
+    this.dataSource.data = nuevaData;
+    //this.gridConfig.data = nuevaData;
+  }
+
+  /** Refresca completamente la vista del grid */
+  public recargar(): void {
+    this.dataSource._updateChangeSubscription();
+    this.cdRef.detectChanges();
   }
 }

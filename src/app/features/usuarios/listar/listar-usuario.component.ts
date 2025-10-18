@@ -4,6 +4,7 @@ import { Sort } from '@angular/material/sort';
 import * as moment from 'moment';
 import { UsuariosService } from 'src/app/core/services/usuarios.service';
 import { ActionEvent, ColumnDefinition, GridOptions } from 'src/app/shared/dynamic-table/dynamic-table.models';
+import { GridUsuariosConfig } from './grid-usuario.config';
 
 @Component({
   selector: 'app-listar-usuario.component',
@@ -12,23 +13,8 @@ import { ActionEvent, ColumnDefinition, GridOptions } from 'src/app/shared/dynam
 })
 export class ListarUsuarioComponent implements OnInit {
 
-  users = [];
 
-    columns: ColumnDefinition[] = [
-      { id: 'nombreCompleto', title: 'Nombre', sortable: true },
-      { id: 'correo', title: 'Correo Electrónico' },
-      { id: 'fechaRegistro', title: 'Fecha de Registro', format: 'date', sortable: true }
-    ];
-
-    gridOptions: GridOptions = {
-      sorting: true,
-      filtering: true,
-      pagination: {
-        pageSize: 5,
-        pageSizeOptions: [5, 10, 20],
-        totalItems: 0
-      }
-    };
+  gridUser = new GridUsuariosConfig();
 
   constructor(private usuarioService : UsuariosService){}
 
@@ -42,15 +28,10 @@ export class ListarUsuarioComponent implements OnInit {
     this.usuarioService.getPagination(parms)
       .subscribe({
       next: (response: any) => {
-        this.users = response.data;
-        this.gridOptions = {
-          ...this.gridOptions,
-          pagination: {
-            ...this.gridOptions.pagination,
-            totalItems: response.total,
-            pageSize: response.items
-          }
-        };
+
+        this.gridUser.cargarDatos(response.data);
+        this.gridUser.setPagination(response.pagina, response.items, response.total);
+        this.gridUser.recargar();
 
       },
       error: (err) => {
@@ -67,14 +48,13 @@ export class ListarUsuarioComponent implements OnInit {
   }
 
   handlePageEvent(event: PageEvent): void {
-    if (this.gridOptions.pagination) {
-      this.gridOptions.pagination.pageSize = event.pageSize;
-    }
     this.getData(event.pageIndex, event.pageSize);
   }
 
   handleSortEvent(event: Sort): void {
     const sort = `${event.active},${event.direction}`;
-    this.getData(0, this.gridOptions.pagination?.pageSize, sort);
+    const size = this.gridUser.options.pagination.pageSize;
+    const page = this.gridUser.options.pagination.page;
+    this.getData(page, size, sort);
   }
 }

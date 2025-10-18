@@ -1,7 +1,7 @@
 /**
  * Define el formato de los datos que se mostrarán en una columna.
  */
-export type ColumnFormat = 'text' | 'date' | 'currency';
+export type ColumnFormat = 'text' | 'date' | 'currency' | 'accion';
 
 /**
  * Define la estructura de una columna en la tabla dinámica.
@@ -12,9 +12,10 @@ export interface ColumnDefinition {
   /** El título que se mostrará en la cabecera de la columna. */
   title: string;
   /** El formato en el que se deben mostrar los datos (opcional, por defecto 'text'). */
-  format?: ColumnFormat;
+  format: ColumnFormat;
   /** Indica si la columna se puede ordenar (opcional, por defecto false). */
-  sortable?: boolean;
+  sortable: boolean;
+  filter : boolean;
 }
 
 /**
@@ -23,6 +24,7 @@ export interface ColumnDefinition {
 export interface GridOptions {
   /** Configuración de la paginación (opcional). */
   pagination: {
+    page : number;
     pageSize: number;
     pageSizeOptions: number[];
     totalItems?: number;
@@ -41,4 +43,16 @@ export interface ActionEvent {
   action: 'edit' | 'delete';
   /** Los datos de la fila sobre la que se realizó la acción. */
   rowData: any;
+}
+
+/**
+ * Define la estructura del evento emitido para acciones en una fila.
+ */
+export interface RowConfiguracion {
+  idColumn: string;
+  esAccion: boolean;
+  tipo : 'link' | 'btn' | 'icon-btn' | 'fecha' | 'texto' | 'numero' | 'moneda';
+  activo: boolean;
+  visible: boolean;
+  linkValue?: string
 }
