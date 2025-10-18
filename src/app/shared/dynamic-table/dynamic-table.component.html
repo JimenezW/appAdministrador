@@ -4,7 +4,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Escriba para filtrar..." #input>
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange.emit($event)">
 
     <!-- Columnas generadas dinámicamente -->
     <ng-container *ngFor="let col of columns" [matColumnDef]="col.id">
@@ -36,8 +36,10 @@
   </table>
 
   <mat-paginator *ngIf="options.pagination"
+                 [length]="options.pagination.totalItems"
                  [pageSize]="options.pagination.pageSize"
                  [pageSizeOptions]="options.pagination.pageSizeOptions"
+                 (page)="pageChange.emit($event)"
                  showFirstLastButtons>
   </mat-paginator>
 </div>

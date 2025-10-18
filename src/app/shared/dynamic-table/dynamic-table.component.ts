@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnDefinition, GridOptions, ActionEvent } from './dynamic-table.models';
 
@@ -15,6 +16,8 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() columns: ColumnDefinition[] = [];
   @Input() options: GridOptions = {};
   @Output() action: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
+  @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+  @Output() sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
