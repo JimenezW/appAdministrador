@@ -23,6 +23,7 @@ export interface ColumnDefinition {
  * Define las opciones de configuración para la tabla dinámica.
  */
 export interface GridOptions {
+  paginationVirtual : boolean;
   /** Configuración de la paginación (opcional). */
   pagination: {
     page : number;

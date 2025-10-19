@@ -76,6 +76,18 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  onVirtualPage(event: PageEvent): void {
+    // Simplemente recalcula los datos locales (sin emitir evento)
+    this.paginator.pageIndex = event.pageIndex;
+    const total = this.gridConfig.options.pagination.totalItems;
+    const startIndex = this.paginator.pageIndex * this.gridConfig.options.pagination.pageSize;
+    const endIndex = startIndex + this.gridConfig.options.pagination.pageSize;
+    if(this.gridConfig.data){
+      this.dataSource.data = this.gridConfig.data.slice(startIndex, endIndex);
+    }
+  }
+
+
     // ============================================================
   // 🔸 MÉTODOS PÚBLICOS ACCESIBLES DESDE gridConfig.component
   // ============================================================
@@ -89,7 +101,7 @@ export class DynamicTableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Actualiza los datos del grid */
   public actualizarDatos(nuevaData: any[]): void {
     this.dataSource.data = nuevaData;
-    //this.gridConfig.data = nuevaData;
+    this.gridConfig.data = nuevaData;
   }
 
   /** Refresca completamente la vista del grid */

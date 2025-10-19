@@ -45,14 +45,15 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-    <!-- PAGINADOR -->
+    <!-- PAGINADOR [pageSizeOptions]="gridConfig.options.paginationVirtual"-->
   <mat-paginator
-    *ngIf="gridConfig.options?.pagination"
+    *ngIf="gridConfig.options.pagination"
     [length]="gridConfig.options.pagination.totalItems"
     [pageSize]="gridConfig.options.pagination.pageSize"
     [pageSizeOptions]="gridConfig.options.pagination.pageSizeOptions"
-    (page)="pageChange.emit($event)"
+    (page)="gridConfig.options.paginationVirtual ? onVirtualPage($event) : pageChange.emit($event)"
     showFirstLastButtons>
   </mat-paginator>
+
 
 </div>
