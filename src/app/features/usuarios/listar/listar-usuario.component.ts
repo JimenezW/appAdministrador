@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { UsuariosService } from 'src/app/core/services/usuarios.service';
 import { ActionEvent, ColumnDefinition, GridOptions } from 'src/app/shared/dynamic-table/dynamic-table.models';
 import { GridUsuariosConfig } from './grid-usuario.config';
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-usuario.component',
@@ -16,7 +18,9 @@ export class ListarUsuarioComponent implements OnInit {
 
   gridUser = new GridUsuariosConfig();
 
-  constructor(private usuarioService : UsuariosService){}
+  constructor(private usuarioService : UsuariosService,
+    private readonly rt : Router
+  ){}
 
   ngOnInit(): void {
     this.getData();
@@ -56,5 +60,10 @@ export class ListarUsuarioComponent implements OnInit {
     const size = this.gridUser.options.pagination.pageSize;
     const page = this.gridUser.options.pagination.page;
     this.getData(page, size, sort);
+  }
+
+  crear(){
+    const urlRol =urlConstRouting.usuarios;
+    this.rt.navigate([urlRol.base, urlRol.crear]);
   }
 }

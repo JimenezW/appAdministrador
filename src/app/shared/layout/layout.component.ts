@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
-import { AutGuard } from 'src/app/core/Guards/aut.guards';
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -17,6 +17,8 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
   showSpinner: boolean = false;
   userName: string = "";
   isAdmin: boolean = false;
+
+  url = urlConstRouting;
 
   private autoLogoutSubscription: Subscription = new Subscription;
 

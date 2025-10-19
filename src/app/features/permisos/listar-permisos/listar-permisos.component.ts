@@ -4,6 +4,8 @@ import { GridPermisosConfig } from './grid-permisos.config';
 import { PageEvent } from '@angular/material/paginator';
 import { ActionEvent } from 'src/app/shared/dynamic-table/dynamic-table.models';
 import { Sort } from '@angular/material/sort';
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-permisos',
@@ -13,7 +15,9 @@ import { Sort } from '@angular/material/sort';
 export class ListarPermisosComponent implements OnInit {
   gridPermisos = new GridPermisosConfig();
 
-  constructor(private readonly permisoService : PermisosService) { }
+  constructor(private readonly permisoService : PermisosService,
+    private readonly rt : Router
+  ) { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -52,6 +56,11 @@ export class ListarPermisosComponent implements OnInit {
     const size = this.gridPermisos.options.pagination.pageSize;
     const page = this.gridPermisos.options.pagination.page;
     this.cargarDatos(page, size, sort);
+  }
+
+  crear(){
+    const urlRol =urlConstRouting.permisos;
+    this.rt.navigate([urlRol.base, urlRol.crear]);
   }
 
 }

@@ -3,7 +3,9 @@ import { LayoutComponent } from "src/app/shared/layout/layout.component";
 import { ListarRolesComponent } from "./listar-roles/listar-roles.component";
 import { CrearRolesComponent } from "./crear-roles/crear-roles.component";
 import { NgModule } from "@angular/core";
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 
+const url = urlConstRouting.roles;
 
 const routes: Routes = [
   {
@@ -11,7 +13,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: ListarRolesComponent },
-      { path: 'crear', component: CrearRolesComponent}
+      { path: url.crear, component: CrearRolesComponent},
+      { path: '**', redirectTo:'',pathMatch:'full'}
     ]
   }
 ];

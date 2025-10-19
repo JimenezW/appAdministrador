@@ -49,6 +49,7 @@ export class LoginComponent {
         }
       },
       error: (er) => {
+        debugger
         this.notificationService.openSnackBar(er.error);
       },
       complete: () => {

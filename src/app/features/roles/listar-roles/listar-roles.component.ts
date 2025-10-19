@@ -4,6 +4,8 @@ import { ActionEvent } from 'src/app/shared/dynamic-table/dynamic-table.models';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { RolesService } from 'src/app/core/services/roles.service';
+import { Router } from '@angular/router';
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 
 @Component({
   selector: 'app-listar-roles',
@@ -14,7 +16,11 @@ export class ListarRolesComponent implements OnInit {
 
   gridRoles = new GridRolesConfig();
 
-  constructor(private readonly roleService : RolesService) { }
+  constructor(
+    private readonly roleService : RolesService,
+    private router : Router
+  )
+  { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -52,6 +58,11 @@ export class ListarRolesComponent implements OnInit {
     const size = this.gridRoles.options.pagination.pageSize;
     const page = this.gridRoles.options.pagination.page;
     this.cargarDatos(page, size, sort);
+  }
+
+  crear(){
+    const urlRol =urlConstRouting.roles;
+    this.router.navigate([urlRol.base, urlRol.crear]);
   }
 
 }

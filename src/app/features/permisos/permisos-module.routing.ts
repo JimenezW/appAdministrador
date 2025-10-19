@@ -3,7 +3,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { LayoutComponent } from "src/app/shared/layout/layout.component";
 import { ListarPermisosComponent } from "./listar-permisos/listar-permisos.component";
 import { CrearPermisoComponent } from "./crear-permiso/crear-permiso.component";
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 
+const url = urlConstRouting.permisos;
 
 const routes: Routes = [
   {
@@ -11,7 +13,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: ListarPermisosComponent },
-      { path: 'crear', component: CrearPermisoComponent}
+      { path: url.crear, component: CrearPermisoComponent},
+      { path: '**', redirectTo:'',pathMatch:'full'}
     ]
   }
 ];

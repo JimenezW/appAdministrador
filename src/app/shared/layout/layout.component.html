@@ -61,7 +61,7 @@
         <mat-nav-list>
           <h3 mat-subheader>Home</h3>
 
-          <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+          <a mat-list-item [routerLink]="['/' + url.dashboard.base ]" routerLinkActive="active">
             <div class="d-inline-flex">
               <mat-icon mat-list-icon>dashboard</mat-icon>
               <span mat-line> Dashboard </span>
@@ -69,21 +69,21 @@
 
           </a>
 
-          <a mat-list-item [routerLink]="['/users']" routerLinkActive="active">
+          <a mat-list-item [routerLink]="['/' + url.usuarios.base]" routerLinkActive="active">
             <div class="d-inline-flex">
               <mat-icon mat-list-icon>groups</mat-icon>
               <span mat-line> Usuarios </span>
             </div>
           </a>
 
-          <a mat-list-item [routerLink]="['/roles']" routerLinkActive="active">
+          <a mat-list-item [routerLink]="['/'+url.roles.base]" routerLinkActive="active">
             <div class="d-inline-flex">
               <mat-icon mat-list-icon>policy</mat-icon>
               <span mat-line> Roles </span>
             </div>
           </a>
 
-          <a mat-list-item [routerLink]="['/permisos']">
+          <a mat-list-item [routerLink]="['/' + url.permisos.base]">
             <div class="d-inline-flex">
               <mat-icon mat-list-icon>badge</mat-icon>
               <span mat-line> Permisos </span>
