@@ -2,28 +2,35 @@ import { DynamicTableComponent } from "src/app/shared/dynamic-table/dynamic-tabl
 import { ColumnDefinition, RowConfiguracion, GridOptions } from "src/app/shared/dynamic-table/dynamic-table.models";
 import { GridConfiguracion } from "src/app/shared/dynamic-table/GridConfiguracion";
 
-export class GridUsuariosConfig implements GridConfiguracion {
+export class GridPermisosConfig implements GridConfiguracion {
   component?: DynamicTableComponent | undefined;
   //data: any[] =[];
   columns: ColumnDefinition[] =
     [
       {
-        id: 'nombreCompleto',
+        id: 'nombre',
         title: 'Nombre',
         sortable: true ,
         filter:true,
         format:'text'
       },
       {
-        id: 'correo',
+        id: 'nombreCorto',
         title: 'Correo Electrónico',
         format: 'text',
         filter: false,
         sortable:false
       },
       {
-        id: 'fechaRegistro',
-        title: 'Fecha de Registro',
+        id:'descripcion',
+        title:'Descripcion',
+        format:'text',
+        filter: false,
+        sortable:false
+      },
+      {
+        id: 'fechaModificacion',
+        title: 'Fecha de modificacion',
         format: 'date',
         sortable: true,
         filter: false
@@ -59,7 +66,7 @@ export class GridUsuariosConfig implements GridConfiguracion {
     }
   ];
   options: GridOptions = {
-      paginationVirtual:false,
+      paginationVirtual:true,
       sorting: true,
       filtering: true,
       pagination: {
@@ -78,6 +85,11 @@ export class GridUsuariosConfig implements GridConfiguracion {
 
   cargarDatos(data=[]){
     this.component?.actualizarDatos(data);
+
+    if(this.options.paginationVirtual){
+      this.setPagination(1, 5, data.length);
+    }
+
   }
 
   limpiar(){
