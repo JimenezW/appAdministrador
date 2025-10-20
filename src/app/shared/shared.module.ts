@@ -5,14 +5,16 @@ import { LayoutComponent } from './layout/layout.component';
 import { materialAngular } from '../core/materialAngular';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
 @NgModule({
   declarations: [
-     LayoutComponent,
-     DynamicTableComponent,
-     MensajeAlertComponent
+    LayoutComponent,
+    DynamicTableComponent,
+    MensajeAlertComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.
   exports: [
     materialAngular,
     DynamicTableComponent,
-    MensajeAlertComponent
+    MensajeAlertComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }
