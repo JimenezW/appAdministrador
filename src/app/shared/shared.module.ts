@@ -4,13 +4,15 @@ import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { materialAngular } from '../core/materialAngular';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
+import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.component';
 
 
 
 @NgModule({
   declarations: [
      LayoutComponent,
-     DynamicTableComponent
+     DynamicTableComponent,
+     MensajeAlertComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
   ],
   exports: [
     materialAngular,
-    DynamicTableComponent
+    DynamicTableComponent,
+    MensajeAlertComponent
   ]
 })
 export class SharedModule { }
