@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { materialAngular } from '../core/materialAngular';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
+import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 
 
@@ -12,6 +13,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
   declarations: [
     LayoutComponent,
     DynamicTableComponent,
+    MensajeAlertComponent,
     SpinnerComponent
   ],
   imports: [
@@ -22,6 +24,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
   exports: [
     materialAngular,
     DynamicTableComponent,
+    MensajeAlertComponent,
     SpinnerComponent
   ]
 })
