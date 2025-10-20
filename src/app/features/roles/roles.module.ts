@@ -4,6 +4,8 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { ListarRolesComponent } from "./listar-roles/listar-roles.component";
 import { CrearRolesComponent } from "./crear-roles/crear-roles.component";
 import { RolesRoutingModule } from "./roles-module.routing";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { RolesRoutingModule } from "./roles-module.routing";
   imports: [
     CommonModule,
     SharedModule,
-    RolesRoutingModule
-  ]
+    RolesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+]
 })
 export class RolesModule { }

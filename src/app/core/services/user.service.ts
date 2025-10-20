@@ -118,9 +118,9 @@ export class UserService {
         // si el backend responde 200 y el body.ok = true
         return !!res?.body?.ok;
       }),
-      catchError(() => {
+      catchError((err) => {
         // cualquier error (401, 403, 500, etc.) devuelve false
-        return of(false);
+        return of(err.message);
       })
     );
 }

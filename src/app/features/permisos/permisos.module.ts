@@ -4,6 +4,7 @@ import { CrearPermisoComponent } from "./crear-permiso/crear-permiso.component";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
 import { PermisosRoutingModule } from "./permisos-module.routing";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import { PermisosRoutingModule } from "./permisos-module.routing";
   imports: [
     CommonModule,
     SharedModule,
-    PermisosRoutingModule
+    PermisosRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PermisosModule { }

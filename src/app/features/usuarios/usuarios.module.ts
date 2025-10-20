@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CrearUsuarioComponent } from './crear/crear-usuario.component';
 import { ListarUsuarioComponent } from './listar/listar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UsuariosModule { }

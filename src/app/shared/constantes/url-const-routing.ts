@@ -1,6 +1,6 @@
 const urlConstRouting = {
   dashboard:{
-    base:''
+    base:'dashboard'
   },
   usuarios : {
     base:'usuarios',

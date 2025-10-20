@@ -15,10 +15,22 @@ export class UsuariosService {
   getPagination(parm : any): Observable<any> {
     const params = HttpParamsUtil.toHttpParams(parm);
 
-    return this._http.get<any>(this.urlBase, {
-      observe: 'response',
-      params
-    }).pipe(
+    return this._http.get<any>(this.urlBase, {params}).pipe(
+      map(res => {
+
+        if(res.ok)
+          return res.body.content;
+
+        return res;
+      }),
+      catchError(() => {
+        return of(false);
+      })
+    );
+  }
+
+  crear(parms : any): Observable<any>{
+    return this._http.post<any>(this.urlBase, parms).pipe(
       map(res => {
 
         if(res.ok)
