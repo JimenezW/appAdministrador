@@ -19,7 +19,7 @@ export class UsuariosService {
       map(res => {
 
         if(res.ok)
-          return res.body.content;
+          return res.content;
 
         return res;
       }),
@@ -34,7 +34,7 @@ export class UsuariosService {
       map(res => {
 
         if(res.ok)
-          return res.body.content;
+          return res.content;
 
         return res;
       }),
