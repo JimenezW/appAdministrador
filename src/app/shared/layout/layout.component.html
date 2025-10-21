@@ -58,53 +58,7 @@
       <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
         [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
 
-        <mat-nav-list>
-          <h3 mat-subheader>Home</h3>
-
-          <a mat-list-item [routerLink]="['/' + url.dashboard.base ]" routerLinkActive="active">
-            <div class="d-inline-flex">
-              <mat-icon mat-list-icon>dashboard</mat-icon>
-              <span mat-line> Dashboard </span>
-            </div>
-
-          </a>
-
-          <a mat-list-item [routerLink]="['/' + url.usuarios.base]" routerLinkActive="active">
-            <div class="d-inline-flex">
-              <mat-icon mat-list-icon>groups</mat-icon>
-              <span mat-line> Usuarios </span>
-            </div>
-          </a>
-
-          <a mat-list-item [routerLink]="['/'+url.roles.base]" routerLinkActive="active">
-            <div class="d-inline-flex">
-              <mat-icon mat-list-icon>policy</mat-icon>
-              <span mat-line> Roles </span>
-            </div>
-          </a>
-
-          <a mat-list-item [routerLink]="['/' + url.permisos.base]">
-            <div class="d-inline-flex">
-              <mat-icon mat-list-icon>badge</mat-icon>
-              <span mat-line> Permisos </span>
-
-            </div>
-          </a>
-
-          <a mat-list-item (click)="logout()">
-            <div class="d-inline-flex">
-              <mat-icon mat-list-icon>logout</mat-icon>
-              <span mat-line> Cerrar sesión </span>
-            </div>
-          </a>
-
-          <mat-divider></mat-divider>
-
-          <h3 mat-subheader>Resources</h3>
-
-
-        </mat-nav-list>
-
+      <app-menu [menuOptions]="MENU_ITEMS"></app-menu>
       </mat-sidenav>
 
       <!-- Main content -->

@@ -4,6 +4,7 @@ import { Subscription, timer } from 'rxjs';
 import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { MenuItem } from '../components/menu/menu.model';
 
 @Component({
   selector: 'app-layout',
@@ -19,6 +20,91 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
   isAdmin: boolean = false;
 
   url = urlConstRouting;
+
+  // menu.config.ts
+  MENU_ITEMS: MenuItem[] = [
+    {
+    title: 'Home',
+    icon: 'home',
+    route: '',
+    typeAccion: 'NA'
+    },
+    {
+      title: 'Dashboard',
+      icon: 'dashboard',
+      route: '/dashboard',
+      typeAccion : 'link'
+    },
+    {
+      title: 'Usuarios',
+      icon: 'groups',
+      typeAccion: 'NA',
+      children: [
+        {
+          title: 'Lista',
+          icon: 'person',
+          route: '/usuarios',
+          typeAccion: 'link' },
+        {
+          title: 'Asig. permiso',
+          icon: 'security',
+          route: '/usuario/asig-permiso',
+          typeAccion: 'link' },
+        {
+          title: 'Asig. roles',
+          icon: 'lock',
+          route: '/permisos',
+          typeAccion:'link' }
+      ]
+    },
+    {
+      title: 'Clientes',
+      icon: 'groups',
+      typeAccion: 'NA',
+      children: [
+        { title: 'Lista', icon: 'person', route: '/cliente', typeAccion:'link' },
+        { title: 'Asig. usuario', icon: 'security', route: '/cliente/asig-user', typeAccion:'link' }
+      ]
+    },
+    {
+      title: 'Catálogos',
+      icon: 'folder',
+      typeAccion: 'NA',
+      children: [
+        {
+          title: 'Roles',
+          icon: 'security',
+          route: '/roles',
+          typeAccion: 'link'
+        },
+        {
+          title: 'Permisos',
+          icon: 'lock',
+          route: '/permisos',
+          typeAccion: 'link'
+        },
+        {
+          title: 'Icons',
+          icon: 'person',
+          route: '/icons',
+          typeAccion:'link'
+        },
+      ]
+    },
+    {
+      title: 'Reportes',
+      icon: 'bar_chart',
+      route: '/reportes',
+      typeAccion: 'link'
+    },
+    {
+      title: 'Salir',
+      icon: 'logout',
+      route: '/reportes',
+      typeAccion: 'link'
+    }
+  ];
+
 
   private autoLogoutSubscription: Subscription = new Subscription;
 

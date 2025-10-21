@@ -6,6 +6,7 @@ import { materialAngular } from '../core/materialAngular';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 
@@ -14,7 +15,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     LayoutComponent,
     DynamicTableComponent,
     MensajeAlertComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     materialAngular,
     DynamicTableComponent,
     MensajeAlertComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MenuComponent
   ]
 })
 export class SharedModule { }

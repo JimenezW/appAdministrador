@@ -1,0 +1,43 @@
+<mat-accordion multi>
+  <ng-container *ngFor="let item of menuOptions">
+
+    <!-- 🟢 Caso 1: sin hijos, solo un enlace directo -->
+    <ng-container *ngIf="!item.children; else expandable">
+      <mat-list-item (click)="navigate(item.route)" class="menu-item">
+        <div class="d-inline-flex">
+          <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+          <span mat-line> {{ item.title }} </span>
+        </div>
+      </mat-list-item>
+    </ng-container>
+
+    <!-- 🟡 Caso 2: con hijos (panel expandible) -->
+    <ng-template #expandable>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="d-inline-flex">
+              <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+              <span mat-line> {{ item.title }} </span>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list class="full-width-list">
+          <a
+            mat-list-item
+            *ngFor="let child of item.children"
+            [routerLink]="child.route"
+            routerLinkActive="active-link"
+          >
+            <div class="d-inline-flex">
+              <mat-icon mat-list-icon>{{ child.icon }}</mat-icon>
+              <span mat-line> {{ child.title }} </span>
+            </div>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </ng-template>
+
+  </ng-container>
+</mat-accordion>
