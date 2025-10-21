@@ -7,6 +7,7 @@ import { UserI } from 'src/app/data/UserI.Interface';
 import { JwtResponseI } from 'src/app/data/JwtResponseI.Interface';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 
 @Injectable({
   providedIn: 'root'
@@ -58,10 +59,11 @@ export class UserService {
 
     logout():Observable<any>{
 
-      return this._http.post<JwtResponseI>(`${environment.apiUrl}/api/login/revoke-token`,null).pipe(tap((res:JwtResponseI)=>{
-        this.token='';
-        this._cookie.deleteAll();
-        this._router.navigateByUrl('/auth/login');
+      return this._http.get<JwtResponseI>(`/api/auth/logout`).pipe(tap((res:JwtResponseI)=>{
+
+        const url =urlConstRouting.home;
+        this._router.navigate([url.login]);
+
 
       }),catchError((err)=>{
         return of(err);

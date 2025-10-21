@@ -1,4 +1,7 @@
 const urlConstRouting = {
+  home:{
+    login: ''
+  },
   dashboard:{
     base:'dashboard'
   },
