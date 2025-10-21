@@ -8,6 +8,8 @@ const urlConstRouting = {
   usuarios : {
     base:'usuarios',
     crear :'crear',
+    asig_permiso : 'asig-permiso',
+    asig_rol : 'asig-rol',
     lista :''
   },
   roles : {

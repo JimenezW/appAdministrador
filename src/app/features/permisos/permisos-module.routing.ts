@@ -4,6 +4,7 @@ import { LayoutComponent } from "src/app/shared/layout/layout.component";
 import { ListarPermisosComponent } from "./listar-permisos/listar-permisos.component";
 import { CrearPermisoComponent } from "./crear-permiso/crear-permiso.component";
 import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
+import { NotFoundComponent } from "src/app/shared/components/not-found/not-found.component";
 
 const url = urlConstRouting.permisos;
 
@@ -14,7 +15,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListarPermisosComponent },
       { path: url.crear, component: CrearPermisoComponent},
-      { path: '**', redirectTo:'',pathMatch:'full'}
+      { path: '**', component: NotFoundComponent, pathMatch:'full'}
     ]
   }
 ];

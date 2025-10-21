@@ -7,6 +7,7 @@ import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.
 import { MensajeAlertComponent } from './components/mensaje-alert/mensaje-alert.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -16,7 +17,8 @@ import { MenuComponent } from './components/menu/menu.component';
     DynamicTableComponent,
     MensajeAlertComponent,
     SpinnerComponent,
-    MenuComponent
+    MenuComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { MenuComponent } from './components/menu/menu.component';
     DynamicTableComponent,
     MensajeAlertComponent,
     SpinnerComponent,
-    MenuComponent
+    MenuComponent,
+    NotFoundComponent
   ]
 })
 export class SharedModule { }

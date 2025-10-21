@@ -48,12 +48,12 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
         {
           title: 'Asig. permiso',
           icon: 'security',
-          route: '/usuario/asig-permiso',
+          route: '/usuarios/asig-permiso',
           typeAccion: 'link' },
         {
           title: 'Asig. roles',
           icon: 'lock',
-          route: '/permisos',
+          route: '/usuarios/asig-rol',
           typeAccion:'link' }
       ]
     },
@@ -62,8 +62,17 @@ export class LayoutComponent  implements OnInit, OnDestroy, AfterViewInit {
       icon: 'groups',
       typeAccion: 'NA',
       children: [
-        { title: 'Lista', icon: 'person', route: '/cliente', typeAccion:'link' },
-        { title: 'Asig. usuario', icon: 'security', route: '/cliente/asig-user', typeAccion:'link' }
+        {
+          title: 'Lista',
+          icon: 'person',
+          route: '/cliente',
+          typeAccion:'link' },
+        {
+          title: 'Asig. usuario',
+          icon: 'security',
+          route: '/cliente/asig-user',
+          typeAccion:'link'
+        }
       ]
     },
     {
