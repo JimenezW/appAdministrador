@@ -84,11 +84,11 @@ export class GridPermisosConfig implements GridConfiguracion {
   }
 
   cargarDatos(data=[]){
-    this.component?.actualizarDatos(data);
 
     if(this.options.paginationVirtual){
-      this.setPagination(1, 5, data.length);
+      this.setPagination(0, 5, data.length);
     }
+    this.component?.actualizarDatos(data);
 
   }
 

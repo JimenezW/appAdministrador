@@ -6,6 +6,7 @@ import { ActionEvent } from 'src/app/shared/dynamic-table/dynamic-table.models';
 import { Sort } from '@angular/material/sort';
 import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 import { Router } from '@angular/router';
+import { MensajeAlertService } from 'src/app/shared/services/mensaje-alert.service';
 
 @Component({
   selector: 'app-listar-permisos',
@@ -16,7 +17,8 @@ export class ListarPermisosComponent implements OnInit {
   gridPermisos = new GridPermisosConfig();
 
   constructor(private readonly permisoService : PermisosService,
-    private readonly rt : Router
+    private readonly rt : Router,
+    private readonly mensajes: MensajeAlertService
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class ListarPermisosComponent implements OnInit {
       next: (response: any) => {
 
         this.gridPermisos.cargarDatos(response);
-        //this.gridUser.setPagination(response.pagina, response.items, response.total);
+        this.gridPermisos.setPagination(0, size, response.length);
         this.gridPermisos.recargar();
 
       },
@@ -61,6 +63,10 @@ export class ListarPermisosComponent implements OnInit {
   crear(){
     const urlRol =urlConstRouting.permisos;
     this.rt.navigate([urlRol.base, urlRol.crear]);
+  }
+
+  cliFiltrar(){
+    this.mensajes.showSuccess('prueba')
   }
 
 }

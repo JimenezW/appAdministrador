@@ -32,4 +32,18 @@ export class PermisosService {
     );
   }
 
+  crear(parms : any): Observable<any>{
+    return this._http.post<any>(this.urlBase, parms).pipe(
+      map(res => {
+        if(res.ok)
+          return res.content;
+
+        return res;
+      }),
+      catchError(() => {
+        return of(false);
+      })
+    );
+  }
+
 }

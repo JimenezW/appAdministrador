@@ -75,4 +75,8 @@ export class CrearRolesComponent implements OnInit, OnDestroy {
 
 
   }
+
+  clickCerrar(){
+    this.clickRegresar();
+  }
 }
