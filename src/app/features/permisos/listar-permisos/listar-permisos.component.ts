@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PermisosService } from 'src/app/core/services/permisos.service';
 import { GridPermisosConfig } from './grid-permisos.config';
 import { PageEvent } from '@angular/material/paginator';
-import { ActionEvent } from 'src/app/shared/dynamic-table/dynamic-table.models';
+import { ActionEvent } from 'src/app/shared/components/dynamic-table/dynamic-table.models';
 import { Sort } from '@angular/material/sort';
 import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 import { Router } from '@angular/router';

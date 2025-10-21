@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridRolesConfig } from './grid-roles.config';
-import { ActionEvent } from 'src/app/shared/dynamic-table/dynamic-table.models';
+import { ActionEvent } from 'src/app/shared/components/dynamic-table/dynamic-table.models';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { RolesService } from 'src/app/core/services/roles.service';

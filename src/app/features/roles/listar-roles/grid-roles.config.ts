@@ -1,6 +1,6 @@
-import { DynamicTableComponent } from "src/app/shared/dynamic-table/dynamic-table.component";
-import { ColumnDefinition, RowConfiguracion, GridOptions } from "src/app/shared/dynamic-table/dynamic-table.models";
-import { GridConfiguracion } from "src/app/shared/dynamic-table/GridConfiguracion";
+import { DynamicTableComponent } from "src/app/shared/components/dynamic-table/dynamic-table.component";
+import { ColumnDefinition, RowConfiguracion, GridOptions } from "src/app/shared/components/dynamic-table/dynamic-table.models";
+import { GridConfiguracion } from "src/app/shared/components/dynamic-table/GridConfiguracion";
 
 export class GridRolesConfig implements GridConfiguracion {
   component?: DynamicTableComponent | undefined;

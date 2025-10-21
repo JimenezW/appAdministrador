@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import * as moment from 'moment';
 import { UsuariosService } from 'src/app/core/services/usuarios.service';
-import { ActionEvent, ColumnDefinition, GridOptions } from 'src/app/shared/dynamic-table/dynamic-table.models';
+import { ActionEvent, ColumnDefinition, GridOptions } from 'src/app/shared/components/dynamic-table/dynamic-table.models';
 import { GridUsuariosConfig } from './grid-usuario.config';
 import urlConstRouting from 'src/app/shared/constantes/url-const-routing';
 import { Router } from '@angular/router';
