@@ -5,13 +5,17 @@ import { CrearUsuarioComponent } from './crear/crear-usuario.component';
 import { ListarUsuarioComponent } from './listar/listar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsignarRolComponent } from './asignar-rol/asignar-rol.component';
+import { AsignarPermisoComponent } from './asignar-permiso/asignar-permiso.component';
 
 
 
 @NgModule({
   declarations: [
     CrearUsuarioComponent,
-    ListarUsuarioComponent
+    ListarUsuarioComponent,
+    AsignarRolComponent,
+    AsignarPermisoComponent
   ],
   imports: [
     CommonModule,
